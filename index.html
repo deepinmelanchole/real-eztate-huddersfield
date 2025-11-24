@@ -97,37 +97,40 @@
 
       /* Glowing marker */
 
-      .marker {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: #ffffff;
-        color: #000000;
-        font-size: 10px;
-        font-weight: 600;
-        box-shadow: 0 0 16px rgba(158, 117, 255, 0.9);
-        white-space: nowrap;
-        cursor: default;
-        animation: pulse 2.4s ease-in-out infinite;
-      }
+     /* Pulsing activity dot */
+.pulse-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: #9e75ff; /* same purple as outline */
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 8px rgba(158, 117, 255, 0.9);
+  animation: dotPulse 2.8s ease-in-out infinite;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-      .marker:hover {
-        transform: translate(-50%, -50%) scale(1.03);
-        box-shadow: 0 0 22px rgba(158, 117, 255, 1);
-      }
+/* Slightly enlarge on hover */
+.pulse-dot:hover {
+  transform: translate(-50%, -50%) scale(2.3);
+  box-shadow: 0 0 18px rgba(158, 117, 255, 1);
+}
 
-      @keyframes pulse {
-        0% {
-          box-shadow: 0 0 10px rgba(158, 117, 255, 0.4);
-      }
-        50% {
-          box-shadow: 0 0 26px rgba(158, 117, 255, 1);
-        }
-        100% {
-          box-shadow: 0 0 10px rgba(158, 117, 255, 0.4);
-        }
-      }
+@keyframes dotPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 0 4px rgba(158, 117, 255, 0.4);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.6);
+    box-shadow: 0 0 14px rgba(158, 117, 255, 1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    box-shadow: 0 0 4px rgba(158, 117, 255, 0.4);
+  }
+}
+
 
       /* CTA panel bottom-left */
 
@@ -214,14 +217,19 @@
             src="huddersfield-map-transparent.svg"
             alt="Huddersfield rental map"
           />
+            <!-- Pulsing dots (test) -->
+            <div class="pulse-dot" style="left: 48%; top: 52%;"></div>
+            <div class="pulse-dot" style="left: 55%; top: 60%;"></div>
+            <div class="pulse-dot" style="left: 43%; top: 61%;"></div>
+            <div class="pulse-dot" style="left: 50%; top: 70%;"></div>
+            <div class="pulse-dot" style="left: 62%; top: 55%;"></div>
+            <div class="pulse-dot" style="left: 38%; top: 45%;"></div>
+            <div class="pulse-dot" style="left: 46%; top: 35%;"></div>
+          </div>
+</main>
 
           <!-- Example marker: adjust left/top % until it sits on the right spot -->
-          <div class="marker" style="left: 50.5%; top: 57%;">
-            £950 pcm — Town centre studio
-          </div>
-        </div>
-      </main>
-    </div>
+         
 
     <!-- CTA PANEL -->
     <div class="cta-panel">
