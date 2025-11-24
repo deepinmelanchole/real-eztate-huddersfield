@@ -99,8 +99,19 @@
 
      /* Pulsing activity dot */
 /* Pulsing activity dot */
+/* Pulsing activity dot with separate tooltip */
 .pulse-dot {
   position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+/* The actual glowing dot */
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 5px;
   height: 5px;
   border-radius: 999px;
@@ -109,22 +120,21 @@
   box-shadow: 0 0 8px rgba(158, 117, 255, 0.9);
   animation: dotPulse 2.8s ease-in-out infinite;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  z-index: 5;
 }
 
-/* Slightly enlarge + brighter on hover */
-.pulse-dot:hover {
+/* Enlarge only the dot on hover */
+.pulse-dot:hover::before {
   transform: translate(-50%, -50%) scale(2.3);
   box-shadow: 0 0 18px rgba(158, 117, 255, 1);
 }
 
-/* Tooltip bubble on hover */
+/* Tooltip bubble (no pulse) */
 .pulse-dot::after {
   content: attr(data-label);
   position: absolute;
   left: 50%;
-  top: -8px;
-  transform: translate(-50%, -130%);
+  top: -10px;
+  transform: translate(-50%, -140%);
   padding: 4px 8px;
   border-radius: 999px;
   background: #ffffff;
@@ -135,11 +145,12 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 20; /* sits above other dots */
 }
 
 .pulse-dot:hover::after {
   opacity: 1;
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -170%);
 }
 
 @keyframes dotPulse {
