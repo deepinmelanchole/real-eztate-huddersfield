@@ -274,36 +274,20 @@
 
     <!-- FOOTER NOTE -->
     <div class="footer-note">Demo prototype · Not live data yet</div>
-  <script>
- const mapBounds = {
-  north: 53.700,
-  south: 53.605,
-  west: -1.855,
-  east: -1.690
-};
+<script>
+  const properties = [
+    { left: 20, top: 20, label: "TEST DOT", delay: 0 }
+  ];
 
-  function latLngToPercent(lat, lng, bounds) {
-    const { north, south, west, east } = bounds;
-
-    const left = ((lng - west) / (east - west)) * 100;
-    const top = ((north - lat) / (north - south)) * 100;
-
-    return { left, top };
-  }
-
-const properties = [
-  { left: 20, top: 20, label: "TEST DOT", delay: 0 }
-];
   const mapWrapper = document.getElementById("mapWrapper");
 
   properties.forEach((property) => {
     const dot = document.createElement("div");
-    const position = latLngToPercent(property.lat, property.lng, mapBounds);
 
     dot.className = "pulse-dot";
-    dot.dataset.label = `£${property.price} pcm — ${property.title}`;
-    dot.style.left = `${position.left}%`;
-    dot.style.top = `${position.top}%`;
+    dot.dataset.label = property.label;
+    dot.style.left = `${property.left}%`;
+    dot.style.top = `${property.top}%`;
     dot.style.setProperty("--delay", `${property.delay}s`);
 
     mapWrapper.appendChild(dot);
