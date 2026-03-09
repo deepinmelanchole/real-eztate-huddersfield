@@ -115,14 +115,13 @@
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #9e75ff; /* same purple as outline */
+  background: #9e75ff;
   transform: translate(-50%, -50%) scale(1);
   box-shadow: 0 0 8px rgba(158, 117, 255, 0.9);
   animation: dotPulse 2.8s ease-in-out infinite;
-animation-delay: var(--delay, 0s);
+  animation-delay: var(--delay, 0s);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
 /* Enlarge only the dot on hover */
 .pulse-dot:hover::before {
   transform: translate(-50%, -50%) scale(2.3);
