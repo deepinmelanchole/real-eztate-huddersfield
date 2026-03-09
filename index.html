@@ -291,49 +291,9 @@
     return { left, top };
   }
 
-  const properties = [
-    {
-      title: "Town centre studio",
-      price: 950,
-      address: "Huddersfield Town Centre",
-      lat: 53.6455,
-      lng: -1.7795,
-      delay: 0
-    },
-    {
-      title: "Lindley 2-bed",
-      price: 1200,
-      address: "Lindley, Huddersfield",
-      lat: 53.6535,
-      lng: -1.812,
-      delay: 0.25
-    },
-    {
-      title: "Moldgreen flat",
-      price: 875,
-      address: "Moldgreen, Huddersfield",
-      lat: 53.646,
-      lng: -1.758,
-      delay: 0.5
-    },
-    {
-      title: "Lockwood apartment",
-      price: 995,
-      address: "Lockwood, Huddersfield",
-      lat: 53.6365,
-      lng: -1.785,
-      delay: 0.75
-    },
-    {
-      title: "Beaumont Park house",
-      price: 1100,
-      address: "Beaumont Park, Huddersfield",
-      lat: 53.625,
-      lng: -1.782,
-      delay: 1
-    }
-  ];
-
+const properties = [
+  { left: 50, top: 50, label: "Train Station", delay: 0 }
+];
   const mapWrapper = document.getElementById("mapWrapper");
 
   properties.forEach((property) => {
