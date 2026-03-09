@@ -324,7 +324,7 @@ animation-delay: var(--delay, 0s);
     dot.dataset.label = property.label;
     dot.style.left = `${property.left}%`;
     dot.style.top = `${property.top}%`;
-    dot.style.animationDelay = `${property.delay}s`;
+    dot.style.setProperty("--delay", `${property.delay}s`);
     mapWrapper.appendChild(dot);
   });
 </script>
