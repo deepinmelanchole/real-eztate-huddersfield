@@ -274,53 +274,78 @@
 
     <!-- FOOTER NOTE -->
     <div class="footer-note">Demo prototype · Not live data yet</div>
-   <script>
+  <script>
+  const mapBounds = {
+    north: 53.690,
+    south: 53.610,
+    west: -1.840,
+    east: -1.700
+  };
+
+  function latLngToPercent(lat, lng, bounds) {
+    const { north, south, west, east } = bounds;
+
+    const left = ((lng - west) / (east - west)) * 100;
+    const top = ((north - lat) / (north - south)) * 100;
+
+    return { left, top };
+  }
+
   const properties = [
-    { left: 48, top: 52, label: "£950 pcm — demo listing", delay: 0 },
-    { left: 55, top: 60, label: "£950 pcm — demo listing", delay: 0.25 },
-    { left: 43, top: 61, label: "£950 pcm — demo listing", delay: 0.5 },
-    { left: 50, top: 70, label: "£950 pcm — demo listing", delay: 0.75 },
-    { left: 62, top: 55, label: "£950 pcm — demo listing", delay: 1 },
-    { left: 38, top: 45, label: "£950 pcm — demo listing", delay: 1.25 },
-    { left: 46, top: 35, label: "£950 pcm — demo listing", delay: 1.5 },
-
-    { left: 50, top: 30, label: "£950 pcm — demo listing", delay: 0.3 },
-    { left: 44, top: 32, label: "£950 pcm — demo listing", delay: 0.55 },
-    { left: 57, top: 33, label: "£950 pcm — demo listing", delay: 0.8 },
-    { left: 40, top: 36, label: "£950 pcm — demo listing", delay: 1.05 },
-
-    { left: 35, top: 48, label: "£950 pcm — demo listing", delay: 0.2 },
-    { left: 32, top: 54, label: "£950 pcm — demo listing", delay: 0.45 },
-    { left: 30, top: 60, label: "£950 pcm — demo listing", delay: 0.7 },
-    { left: 33, top: 66, label: "£950 pcm — demo listing", delay: 0.95 },
-    { left: 37, top: 71, label: "£950 pcm — demo listing", delay: 1.2 },
-
-    { left: 48, top: 57, label: "£950 pcm — demo listing", delay: 0.15 },
-    { left: 52, top: 58, label: "£950 pcm — demo listing", delay: 0.4 },
-    { left: 47, top: 63, label: "£950 pcm — demo listing", delay: 0.65 },
-    { left: 53, top: 65, label: "£950 pcm — demo listing", delay: 0.9 },
-
-    { left: 60, top: 48, label: "£950 pcm — demo listing", delay: 0.35 },
-    { left: 66, top: 52, label: "£950 pcm — demo listing", delay: 0.6 },
-    { left: 70, top: 57, label: "£950 pcm — demo listing", delay: 0.85 },
-    { left: 68, top: 63, label: "£950 pcm — demo listing", delay: 1.1 },
-    { left: 63, top: 68, label: "£950 pcm — demo listing", delay: 1.35 },
-
-    { left: 56, top: 72, label: "£950 pcm — demo listing", delay: 0.5 },
-    { left: 48, top: 76, label: "£950 pcm — demo listing", delay: 0.75 },
-    { left: 41, top: 74, label: "£950 pcm — demo listing", delay: 1 },
-    { left: 36, top: 70, label: "£950 pcm — demo listing", delay: 1.25 }
+    {
+      title: "Town centre studio",
+      price: 950,
+      address: "Huddersfield Town Centre",
+      lat: 53.6455,
+      lng: -1.7795,
+      delay: 0
+    },
+    {
+      title: "Lindley 2-bed",
+      price: 1200,
+      address: "Lindley, Huddersfield",
+      lat: 53.6535,
+      lng: -1.812,
+      delay: 0.25
+    },
+    {
+      title: "Moldgreen flat",
+      price: 875,
+      address: "Moldgreen, Huddersfield",
+      lat: 53.646,
+      lng: -1.758,
+      delay: 0.5
+    },
+    {
+      title: "Lockwood apartment",
+      price: 995,
+      address: "Lockwood, Huddersfield",
+      lat: 53.6365,
+      lng: -1.785,
+      delay: 0.75
+    },
+    {
+      title: "Beaumont Park house",
+      price: 1100,
+      address: "Beaumont Park, Huddersfield",
+      lat: 53.625,
+      lng: -1.782,
+      delay: 1
+    }
   ];
 
   const mapWrapper = document.getElementById("mapWrapper");
 
   properties.forEach((property) => {
     const dot = document.createElement("div");
+    const position = latLngToPercent(property.lat, property.lng, mapBounds);
+
     dot.className = "pulse-dot";
-    dot.dataset.label = property.label;
-    dot.style.left = `${property.left}%`;
-    dot.style.top = `${property.top}%`;
+    dot.dataset.label = `£${property.price} pcm — ${property.title}`;
+    dot.style.left = `${position.left}%`;
+    dot.style.top = `${position.top}%`;
     dot.style.setProperty("--delay", `${property.delay}s`);
+
     mapWrapper.appendChild(dot);
   });
 </script>
