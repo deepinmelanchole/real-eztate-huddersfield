@@ -333,26 +333,42 @@
       top: 60
     }
   ];
-  function computeBounds(points) {
-    const north = Math.max(...points.map((p) => p.lat));
-    const south = Math.min(...points.map((p) => p.lat));
-    const east = Math.max(...points.map((p) => p.lng));
-    const west = Math.min(...points.map((p) => p.lng));
+  function computeCalibration(points) {
+  const north = Math.max(...points.map((p) => p.lat));
+  const south = Math.min(...points.map((p) => p.lat));
+  const east = Math.max(...points.map((p) => p.lng));
+  const west = Math.min(...points.map((p) => p.lng));
 
-    return { north, south, east, west };
-  }
+  const minLeft = Math.min(...points.map((p) => p.left));
+  const maxLeft = Math.max(...points.map((p) => p.left));
+  const minTop = Math.min(...points.map((p) => p.top));
+  const maxTop = Math.max(...points.map((p) => p.top));
 
-  const mapBounds = computeBounds(calibrationPoints);
+  return {
+    north,
+    south,
+    east,
+    west,
+    minLeft,
+    maxLeft,
+    minTop,
+    maxTop
+  };
+}
 
-  function latLngToPercent(lat, lng, bounds) {
-    const { north, south, west, east } = bounds;
+const calibration = computeCalibration(calibrationPoints);
 
-    const left = ((lng - west) / (east - west)) * 100;
-    const top = ((north - lat) / (north - south)) * 100;
+function latLngToPercent(lat, lng, calibration) {
+  const { north, south, west, east, minLeft, maxLeft, minTop, maxTop } = calibration;
 
-    return { left, top };
-  }
+  const left =
+    minLeft + ((lng - west) / (east - west)) * (maxLeft - minLeft);
 
+  const top =
+    minTop + ((north - lat) / (north - south)) * (maxTop - minTop);
+
+  return { left, top };
+}
   console.log("mapBounds:", mapBounds);
   console.log(
     "Train Station position:",
