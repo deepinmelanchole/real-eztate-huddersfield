@@ -430,6 +430,34 @@ const properties = [
 
   mapWrapper.appendChild(dot);
 });
+  async function geocodeAddress(address) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json"
+    }
+  });
+
+  const data = await response.json();
+
+  if (!data || data.length === 0) {
+    throw new Error("Address not found");
+  }
+
+  return {
+    lat: parseFloat(data[0].lat),
+    lng: parseFloat(data[0].lon),
+    displayName: data[0].display_name
+  };
+}
+  geocodeAddress("Queensgate, Huddersfield")
+  .then((result) => {
+    console.log("Geocode result:", result);
+  })
+  .catch((error) => {
+    console.error("Geocode error:", error);
+  });
 </script>
   </body>
 </html>
