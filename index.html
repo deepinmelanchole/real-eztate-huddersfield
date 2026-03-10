@@ -343,6 +343,14 @@
   }
 
   const mapBounds = computeBounds(calibrationPoints);
+   function latLngToPercent(lat, lng, bounds) {
+    const { north, south, west, east } = bounds;
+
+    const left = ((lng - west) / (east - west)) * 100;
+    const top = ((north - lat) / (north - south)) * 100;
+
+    return { left, top };
+  }
 
   console.log("mapBounds:", mapBounds);
 
