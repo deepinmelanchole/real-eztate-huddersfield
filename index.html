@@ -343,7 +343,8 @@
   }
 
   const mapBounds = computeBounds(calibrationPoints);
-   function latLngToPercent(lat, lng, bounds) {
+
+  function latLngToPercent(lat, lng, bounds) {
     const { north, south, west, east } = bounds;
 
     const left = ((lng - west) / (east - west)) * 100;
@@ -353,8 +354,25 @@
   }
 
   console.log("mapBounds:", mapBounds);
+  console.log(
+    "Train Station position:",
+    latLngToPercent(53.6484809, -1.7844326, mapBounds)
+  );
 
-  console.log(calibrationPoints);
+  const mapWrapper = document.getElementById("mapWrapper");
+
+  calibrationPoints.forEach((point, index) => {
+    const position = latLngToPercent(point.lat, point.lng, mapBounds);
+
+    const dot = document.createElement("div");
+    dot.className = "pulse-dot";
+    dot.dataset.label = point.name;
+    dot.style.left = `${position.left}%`;
+    dot.style.top = `${position.top}%`;
+    dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+
+    mapWrapper.appendChild(dot);
+  });
 </script>
   </body>
 </html>
