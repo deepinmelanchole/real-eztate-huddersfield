@@ -79,7 +79,7 @@
       .map-wrapper {
         position: relative;
         width: 100%;
-        max-width: 980px;
+        max-width: 900px;
         padding: 0 16px;
         display: flex;
         justify-content: center;
@@ -377,18 +377,21 @@ console.log(
   
   const mapWrapper = document.getElementById("mapWrapper");
 
-  calibrationPoints.forEach((point, index) => {
-    const position = latLngToPercent(point.lat, point.lng);
+calibrationPoints.forEach((point, index) => {
 
-    const dot = document.createElement("div");
-    dot.className = "pulse-dot";
-    dot.dataset.label = point.name;
-    dot.style.left = `${position.left}%`;
-    dot.style.top = `${position.top}%`;
-    dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+  const dot = document.createElement("div");
+  dot.className = "pulse-dot";
 
-    mapWrapper.appendChild(dot);
-  });
+  dot.dataset.label = point.name;
+
+  dot.style.left = `${point.left}%`;
+  dot.style.top = `${point.top}%`;
+
+  dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+
+  mapWrapper.appendChild(dot);
+
+});
 </script>
   </body>
 </html>
