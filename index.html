@@ -333,6 +333,18 @@
       top: 60
     }
   ];
+  function computeBounds(points) {
+    const north = Math.max(...points.map((p) => p.lat));
+    const south = Math.min(...points.map((p) => p.lat));
+    const east = Math.max(...points.map((p) => p.lng));
+    const west = Math.min(...points.map((p) => p.lng));
+
+    return { north, south, east, west };
+  }
+
+  const mapBounds = computeBounds(calibrationPoints);
+
+  console.log("mapBounds:", mapBounds);
 
   console.log(calibrationPoints);
 </script>
