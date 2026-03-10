@@ -333,6 +333,7 @@
       top: 60
     }
   ];
+  
   function fitLinear(points, inputKey, outputKey) {
   const n = points.length;
 
@@ -374,8 +375,31 @@ console.log(
   "Train Station position:",
   latLngToPercent(53.6484809, -1.7844326)
 );
-  
+const properties = [
+  {
+    title: "Modern Studio near Uni",
+    price: 950,
+    address: "Queensgate, Huddersfield",
+    lat: 53.6484809,
+    lng: -1.7844326,
+    beds: 1,
+    area: "HD1",
+    delay: 0
+  }
+];
   const mapWrapper = document.getElementById("mapWrapper");
+  properties.forEach((property, index) => {
+  const position = latLngToPercent(property.lat, property.lng);
+
+  const dot = document.createElement("div");
+  dot.className = "pulse-dot";
+  dot.dataset.label = `£${property.price} pcm — ${property.title}`;
+  dot.style.left = `${position.left}%`;
+  dot.style.top = `${position.top}%`;
+  dot.style.setProperty("--delay", `${property.delay ?? (index * 0.15).toFixed(2)}s`);
+
+  mapWrapper.appendChild(dot);
+});
 </script>
   </body>
 </html>
