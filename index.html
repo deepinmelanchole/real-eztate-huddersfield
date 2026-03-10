@@ -333,43 +333,47 @@
       top: 60
     }
   ];
-  function computeCalibration(points) {
-  const north = Math.max(...points.map((p) => p.lat));
-  const south = Math.min(...points.map((p) => p.lat));
-  const east = Math.max(...points.map((p) => p.lng));
-  const west = Math.min(...points.map((p) => p.lng));
+  function fitLinear(points, inputKey, outputKey) {
+  const n = points.length;
 
-  const minLeft = Math.min(...points.map((p) => p.left));
-  const maxLeft = Math.max(...points.map((p) => p.left));
-  const minTop = Math.min(...points.map((p) => p.top));
-  const maxTop = Math.max(...points.map((p) => p.top));
+  let sumX = 0;
+  let sumY = 0;
+  let sumXY = 0;
+  let sumXX = 0;
 
-  return {
-    north,
-    south,
-    east,
-    west,
-    minLeft,
-    maxLeft,
-    minTop,
-    maxTop
-  };
+  points.forEach((p) => {
+    const x = p[inputKey];
+    const y = p[outputKey];
+
+    sumX += x;
+    sumY += y;
+    sumXY += x * y;
+    sumXX += x * x;
+  });
+
+  const slope =
+    (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+
+  const intercept = (sumY - slope * sumX) / n;
+
+  return { slope, intercept };
 }
 
-const calibration = computeCalibration(calibrationPoints);
+const leftFit = fitLinear(calibrationPoints, "lng", "left");
+const topFit = fitLinear(calibrationPoints, "lat", "top");
 
-function latLngToPercent(lat, lng, calibration) {
-  const { north, south, west, east, minLeft, maxLeft, minTop, maxTop } = calibration;
-
-  const left =
-    minLeft + ((lng - west) / (east - west)) * (maxLeft - minLeft);
-
-  const top =
-    minTop + ((north - lat) / (north - south)) * (maxTop - minTop);
+function latLngToPercent(lat, lng) {
+  const left = leftFit.slope * lng + leftFit.intercept;
+  const top = topFit.slope * lat + topFit.intercept;
 
   return { left, top };
 }
-  console.log("calibration:", calibration);
+  console.log("leftFit:", leftFit);
+console.log("topFit:", topFit);
+console.log(
+  "Train Station position:",
+  latLngToPercent(53.6484809, -1.7844326)
+);
   console.log(
     "Train Station position:",
     latLngToPercent(53.6484809, -1.7844326, calibration)
@@ -378,7 +382,7 @@ function latLngToPercent(lat, lng, calibration) {
   const mapWrapper = document.getElementById("mapWrapper");
 
   calibrationPoints.forEach((point, index) => {
-    const position = latLngToPercent(point.lat, point.lng, calibration);
+    const position = latLngToPercent(point.lat, point.lng);
 
     const dot = document.createElement("div");
     dot.className = "pulse-dot";
