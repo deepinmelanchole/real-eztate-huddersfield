@@ -369,16 +369,16 @@ function latLngToPercent(lat, lng, calibration) {
 
   return { left, top };
 }
-  console.log("mapBounds:", mapBounds);
+  console.log("calibration:", calibration);
   console.log(
     "Train Station position:",
-    latLngToPercent(53.6484809, -1.7844326, mapBounds)
+    latLngToPercent(53.6484809, -1.7844326, calibration)
   );
 
   const mapWrapper = document.getElementById("mapWrapper");
 
   calibrationPoints.forEach((point, index) => {
-    const position = latLngToPercent(point.lat, point.lng, mapBounds);
+    const position = latLngToPercent(point.lat, point.lng, calibration);
 
     const dot = document.createElement("div");
     dot.className = "pulse-dot";
