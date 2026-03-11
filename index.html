@@ -311,7 +311,64 @@
     <div class="footer-note">Demo prototype · Not live data yet</div>
 <script>
   
-  
+  const calibrationPoints = [
+  {
+    name: "Train Station",
+    lat: 53.6484809,
+    lng: -1.7844326,
+    left: 51,
+    top: 53
+  },
+  {
+    name: "Royal Infirmary",
+    lat: 53.6553383,
+    lng: -1.8193652,
+    left: 31.7,
+    top: 42.9
+  },
+  {
+    name: "Manor House Lindley",
+    lat: 53.6594628,
+    lng: -1.8255754,
+    left: 27.9,
+    top: 37.9
+  },
+  {
+    name: "Greenhead Park",
+    lat: 53.6492573,
+    lng: -1.8011635,
+    left: 43,
+    top: 53
+  },
+  {
+    name: "Castle Hill",
+    lat: 53.6229678,
+    lng: -1.7757632,
+    left: 58.65,
+    top: 79.9
+  },
+  {
+    name: "Beaumont Park",
+    lat: 53.6226209,
+    lng: -1.8142747,
+    left: 34.75,
+    top: 82.62
+  },
+  {
+    name: "Aphrodite Suites",
+    lat: 53.655464,
+    lng: -1.7850276,
+    left: 52.2,
+    top: 42.5
+  },
+  {
+    name: "University of Huddersfield",
+    lat: 53.6428317,
+    lng: -1.7806784,
+    left: 55,
+    top: 60
+  }
+];
   function fitLinear(points, inputKey, outputKey) {
   const n = points.length;
 
@@ -353,61 +410,7 @@ console.log(
   "Train Station position:",
   latLngToPercent(53.6484809, -1.7844326)
 );
-const properties = [
-  {
-    title: "Modern Studio near Uni",
-    price: 950,
-    address: "Queensgate, Huddersfield",
-    lat: 53.6484809,
-    lng: -1.7844326,
-    beds: 1,
-    area: "HD1",
-    delay: 0
-  },
-  {
-    title: "Lindley Apartment",
-    price: 1200,
-    address: "Lindley, Huddersfield",
-    lat: 53.6594628,
-    lng: -1.8255754,
-    beds: 2,
-    area: "Lindley",
-    delay: 0.2
-  },
-  {
-    title: "Parkside Flat",
-    price: 875,
-    address: "Greenhead Park, Huddersfield",
-    lat: 53.6492573,
-    lng: -1.8011635,
-    beds: 1,
-    area: "HD1",
-    delay: 0.4
-  },
-  {
-    title: "South Huddersfield House",
-    price: 1100,
-    address: "Beaumont Park, Huddersfield",
-    lat: 53.6226209,
-    lng: -1.8142747,
-    beds: 3,
-    area: "Beaumont Park",
-    delay: 0.6
-  }
-];
-  const mapWrapper = document.getElementById("mapWrapper");
-  properties.forEach((property, index) => {
-  const position = latLngToPercent(property.lat, property.lng);
 
-  const dot = document.createElement("div");
-  dot.className = "pulse-dot";
-  dot.dataset.label = `£${property.price} pcm — ${property.title}`;
-  dot.style.left = `${position.left}%`;
-  dot.style.top = `${position.top}%`;
-  dot.style.setProperty("--delay", `${property.delay ?? (index * 0.15).toFixed(2)}s`);
-
-  mapWrapper.appendChild(dot);
-});
   async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
 
@@ -459,7 +462,7 @@ const listings = [
     description: "Affordable flat with quick access to central Huddersfield."
   }
 ];
-
+const mapWrapper = document.getElementById("mapWrapper");
 listings.forEach((listing, index) => {
   geocodeAddress(listing.address)
     .then((result) => {
