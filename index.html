@@ -451,24 +451,32 @@ const properties = [
     displayName: data[0].display_name
   };
 }
-const testAddress = "Lindley, Huddersfield";
+const testAddresses = [
+  "Queensgate, Huddersfield",
+  "Lindley, Huddersfield",
+  "Beaumont Park, Huddersfield",
+  "Moldgreen, Huddersfield"
+];
 
-geocodeAddress(testAddress)
-  .then((result) => {
-    const position = latLngToPercent(result.lat, result.lng);
+testAddresses.forEach((address, index) => {
+  geocodeAddress(address)
+    .then((result) => {
+      const position = latLngToPercent(result.lat, result.lng);
 
-    const dot = document.createElement("div");
-    dot.className = "pulse-dot";
-    dot.dataset.label = result.displayName;
+      const dot = document.createElement("div");
+      dot.className = "pulse-dot";
+      dot.dataset.label = result.displayName;
 
-    dot.style.left = `${position.left}%`;
-    dot.style.top = `${position.top}%`;
+      dot.style.left = `${position.left}%`;
+      dot.style.top = `${position.top}%`;
+      dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
 
-    mapWrapper.appendChild(dot);
-  })
-  .catch((error) => {
-    console.error("Geocode error:", error);
-  });
+      mapWrapper.appendChild(dot);
+    })
+    .catch((error) => {
+      console.error(`Geocode error for ${address}:`, error);
+    });
+});
 </script>
   </body>
 </html>
