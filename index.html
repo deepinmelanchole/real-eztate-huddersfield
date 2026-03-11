@@ -552,8 +552,33 @@ listings.forEach((listing, index) => {
       dot.style.left = `${position.left}%`;
       dot.style.top = `${position.top}%`;
       dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+      dot.dataset.price = `£${listing.price} pcm`;
+dot.dataset.title = listing.title;
+dot.dataset.description = listing.description;
+dot.dataset.image = listing.image;
+      const propertyCard = document.getElementById("propertyCard");
+const propertyCardImage = document.getElementById("propertyCardImage");
+const propertyCardPrice = document.getElementById("propertyCardPrice");
+const propertyCardTitle = document.getElementById("propertyCardTitle");
+const propertyCardDescription = document.getElementById("propertyCardDescription");
+
+dot.addEventListener("mouseenter", () => {
+  propertyCardImage.src = dot.dataset.image;
+  propertyCardPrice.textContent = dot.dataset.price;
+  propertyCardTitle.textContent = dot.dataset.title;
+  propertyCardDescription.textContent = dot.dataset.description;
+
+  propertyCard.style.left = `${position.left}%`;
+  propertyCard.style.top = `${position.top}%`;
+  propertyCard.classList.add("visible");
+});
+
+dot.addEventListener("mouseleave", () => {
+  propertyCard.classList.remove("visible");
+});
 
       mapWrapper.appendChild(dot);
+      
     })
     .catch((error) => {
       console.error(`Geocode error for ${listing.address}:`, error);
