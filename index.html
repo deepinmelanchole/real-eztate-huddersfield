@@ -457,6 +457,8 @@ if (image.includes("drive.google.com/open?id=")) {
       
       geocodeAddress(address)
         .then((result) => {
+          console.log("Sheet listing geocode:", address, result);
+          
           const position = latLngToPercent(result.lat, result.lng);
 
           const dot = document.createElement("div");
