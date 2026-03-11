@@ -76,25 +76,35 @@
         padding: 8px 0 60px;
       }
 
-      .map-wrapper {
-        position: relative;
-        width: 100%;
-        max-width: 900px;
-        padding: 0 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+     .map-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 700px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+      #map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
 
-      .map-wrapper img {
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        pointer-events: none;
-        user-select: none;
-        display: block;
-      }
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
+}
 
+     
       /* Glowing marker */
 
      /* Pulsing activity dot */
@@ -253,6 +263,8 @@
         }
       }
     </style>
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
   </head>
   <body>
     <div class="page">
@@ -273,11 +285,14 @@
 
     <!-- MAP -->
 <main>
-  <div class="map-wrapper" id="mapWrapper">
-    <img
-      src="huddersfield-map-transparent.svg"
-      alt="Huddersfield rental map"
-    />
+ <div class="map-wrapper">
+
+  <div id="map"></div>
+
+  <img
+    src="huddersfield-map-transparent.svg"
+    class="map-overlay"
+  />
     <div class="property-card" id="propertyCard">
   <img id="propertyCardImage" src="" alt="Property preview" />
   <div class="property-card-body">
@@ -368,7 +383,12 @@
       top: 60
     }
   ];
-
+const map = new maplibregl.Map({
+  container: "map",
+  style: "https://demotiles.maplibre.org/style.json",
+  center: [-1.782, 53.645],
+  zoom: 12.4
+});
   const sheetURL = "https://opensheet.elk.sh/1YL1LzLi1lQJzoaJFkMtICv9KVKOUIDyGpKupLM9kt3c/Form%20Responses%201";
 
   function fitLinear(points, inputKey, outputKey) {
