@@ -217,7 +217,48 @@
         opacity: 0.5;
         z-index: 20;
       }
+.property-card {
+  position: fixed;
+  right: 16px;
+  top: 140px;
+  width: 300px;
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
+  z-index: 30;
+  backdrop-filter: blur(14px);
+}
 
+.property-card img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.property-card-body {
+  padding: 14px;
+}
+
+.property-card-price {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.property-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.property-card-description {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
       @media (max-width: 600px) {
         main {
           padding-bottom: 80px;
@@ -257,7 +298,16 @@
 </main>
           <!-- Example marker: adjust left/top % until it sits on the right spot -->
          
-
+<div class="property-card" id="propertyCard">
+  <img id="propertyCardImage" src="" alt="Property preview" />
+  <div class="property-card-body">
+    <div class="property-card-price" id="propertyCardPrice">£950 pcm</div>
+    <div class="property-card-title" id="propertyCardTitle">Modern Studio</div>
+    <div class="property-card-description" id="propertyCardDescription">
+      Compact modern studio near the university and town centre.
+    </div>
+  </div>
+</div>
     <!-- CTA PANEL -->
     <div class="cta-panel">
       <strong>Own or manage property in Huddersfield?</strong>
@@ -455,22 +505,30 @@ const listings = [
   {
     title: "Modern Studio",
     price: 950,
-    address: "Queensgate, Huddersfield"
+    address: "Queensgate, Huddersfield",
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+    description: "Compact modern studio near the university and town centre."
   },
   {
     title: "Lindley Apartment",
     price: 1200,
-    address: "Lindley, Huddersfield"
+    address: "Lindley, Huddersfield",
+    image: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80",
+    description: "Spacious apartment in a quieter area with a premium feel."
   },
   {
     title: "Parkside House",
     price: 1100,
-    address: "Beaumont Park, Huddersfield"
+    address: "Beaumont Park, Huddersfield",
+    image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+    description: "Comfortable family-style house close to green space."
   },
   {
     title: "Moldgreen Flat",
     price: 875,
-    address: "Moldgreen, Huddersfield"
+    address: "Moldgreen, Huddersfield",
+    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80",
+    description: "Affordable flat with quick access to central Huddersfield."
   }
 ];
 
