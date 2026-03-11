@@ -451,20 +451,20 @@ const properties = [
     displayName: data[0].display_name
   };
 }
-geocodeAddress("Queensgate, Huddersfield")
-  .then((result) => {
+const testAddress = "Queensgate, Huddersfield";
 
+geocodeAddress(testAddress)
+  .then((result) => {
     const position = latLngToPercent(result.lat, result.lng);
 
     const dot = document.createElement("div");
     dot.className = "pulse-dot";
-    dot.dataset.label = "Test listing from address";
+    dot.dataset.label = `Address test — ${testAddress}`;
 
     dot.style.left = `${position.left}%`;
     dot.style.top = `${position.top}%`;
 
     mapWrapper.appendChild(dot);
-
   })
   .catch((error) => {
     console.error("Geocode error:", error);
