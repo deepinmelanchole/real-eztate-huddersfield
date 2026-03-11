@@ -451,21 +451,37 @@ const properties = [
     displayName: data[0].display_name
   };
 }
-const testAddresses = [
-  "Queensgate, Huddersfield",
-  "Lindley, Huddersfield",
-  "Beaumont Park, Huddersfield",
-  "Moldgreen, Huddersfield"
+const listings = [
+  {
+    title: "Modern Studio",
+    price: 950,
+    address: "Queensgate, Huddersfield"
+  },
+  {
+    title: "Lindley Apartment",
+    price: 1200,
+    address: "Lindley, Huddersfield"
+  },
+  {
+    title: "Parkside House",
+    price: 1100,
+    address: "Beaumont Park, Huddersfield"
+  },
+  {
+    title: "Moldgreen Flat",
+    price: 875,
+    address: "Moldgreen, Huddersfield"
+  }
 ];
 
-testAddresses.forEach((address, index) => {
-  geocodeAddress(address)
+listings.forEach((listing, index) => {
+  geocodeAddress(listing.address)
     .then((result) => {
       const position = latLngToPercent(result.lat, result.lng);
 
       const dot = document.createElement("div");
       dot.className = "pulse-dot";
-      dot.dataset.label = result.displayName;
+      dot.dataset.label = `£${listing.price} pcm — ${listing.title}`;
 
       dot.style.left = `${position.left}%`;
       dot.style.top = `${position.top}%`;
@@ -474,7 +490,7 @@ testAddresses.forEach((address, index) => {
       mapWrapper.appendChild(dot);
     })
     .catch((error) => {
-      console.error(`Geocode error for ${address}:`, error);
+      console.error(`Geocode error for ${listing.address}:`, error);
     });
 });
 </script>
