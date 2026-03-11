@@ -446,9 +446,10 @@
       const price = listing["Monthly Rent"];
       const description = listing["Property Description"];
       const image =
-        listing["Property Photo Image link (Optional)"] ||
-        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
-
+  listing["Upload Property Photos"] ||
+  listing["Property Photo Image link (Optional)"] ||
+  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
+      
       geocodeAddress(address)
         .then((result) => {
           const position = latLngToPercent(result.lat, result.lng);
