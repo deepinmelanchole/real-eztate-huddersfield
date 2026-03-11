@@ -459,7 +459,7 @@ geocodeAddress(testAddress)
 
     const dot = document.createElement("div");
     dot.className = "pulse-dot";
-    dot.dataset.label = `Address test — ${testAddress}`;
+    dot.dataset.label = result.displayName;
 
     dot.style.left = `${position.left}%`;
     dot.style.top = `${position.top}%`;
