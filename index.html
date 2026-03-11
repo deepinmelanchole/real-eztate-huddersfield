@@ -386,6 +386,7 @@
     sumXY += x * y;
     sumXX += x * x;
   });
+    const sheetURL = "https://opensheet.elk.sh/1YL1LzLi1lQJzoaJFkMtICv9KVKOUIDyGpKupLM9kt3c/Form%20Responses%201";
 
   const slope =
     (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
@@ -419,6 +420,69 @@ console.log(
       Accept: "application/json"
     }
   });
+    async function loadListingsFromSheet() {
+
+  const response = await fetch(sheetURL);
+  const listings = await response.json();
+
+  listings.forEach((listing, index) => {
+
+    const address = listing["Property Address"];
+    const title = listing["Property Title"];
+    const price = listing["Monthly Rent"];
+    const description = listing["Property Description"];
+    const image = listing["Property Photo Image link (Optional)"] || 
+                  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85";
+
+    geocodeAddress(address)
+      .then((result) => {
+
+        const position = latLngToPercent(result.lat, result.lng);
+
+        const dot = document.createElement("div");
+        dot.className = "pulse-dot";
+
+        dot.style.left = `${position.left}%`;
+        dot.style.top = `${position.top}%`;
+        dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+
+        dot.dataset.price = `£${price} pcm`;
+        dot.dataset.title = title;
+        dot.dataset.description = description;
+        dot.dataset.image = image;
+
+        mapWrapper.appendChild(dot);
+
+        dot.addEventListener("mouseenter", () => {
+
+          propertyCardImage.src = dot.dataset.image;
+          propertyCardPrice.textContent = dot.dataset.price;
+          propertyCardTitle.textContent = dot.dataset.title;
+          propertyCardDescription.textContent = dot.dataset.description;
+
+          propertyCard.style.left = `${position.left}%`;
+          propertyCard.style.top = `${position.top}%`;
+
+          propertyCard.classList.add("visible");
+
+        });
+
+        dot.addEventListener("mouseleave", () => {
+
+          propertyCard.classList.remove("visible");
+
+        });
+
+      })
+      .catch((error) => {
+
+        console.error("Geocode error:", error);
+
+      });
+
+  });
+
+}
 
   const data = await response.json();
 
@@ -506,6 +570,7 @@ dot.addEventListener("mouseleave", () => {
     .catch((error) => {
       console.error(`Geocode error for ${listing.address}:`, error);
     });
+  loadListingsFromSheet();
 });
 </script>
   </body>
