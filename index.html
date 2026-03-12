@@ -93,7 +93,16 @@
   height: 100%;
   border-radius: 0;
 }
-
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.55;
+}
 
 
      
@@ -290,8 +299,12 @@
  <div class="map-wrapper">
 
   <div id="map"></div>
+    <img
+    src="huddersfield-map-transparent.svg"
+    class="map-overlay"
+    alt="Huddersfield rental map overlay"
+  />
 
-  
     <div class="property-card" id="propertyCard">
   <img id="propertyCardImage" src="" alt="Property preview" />
   <div class="property-card-body">
@@ -384,36 +397,12 @@
   ];
 const map = new maplibregl.Map({
   container: "map",
-  style: {
-    version: 8,
-    sources: {},
-    layers: []
-  },
+  style: "https://demotiles.maplibre.org/style.json",
   center: [-1.782, 53.645],
   zoom: 12.4,
   interactive: false
 });
-  map.on("load", () => {
-  map.addSource("huddersfield-overlay", {
-    type: "image",
-    url: "huddersfield-map-transparent.svg",
-    coordinates: [
-      [-1.855, 53.700], // top-left
-      [-1.690, 53.700], // top-right
-      [-1.690, 53.605], // bottom-right
-      [-1.855, 53.605]  // bottom-left
-    ]
-  });
-
-  map.addLayer({
-    id: "huddersfield-overlay-layer",
-    type: "raster",
-    source: "huddersfield-overlay",
-    paint: {
-      "raster-opacity": 1
-    }
-  });
-});
+ 
   const sheetURL = "https://opensheet.elk.sh/1YL1LzLi1lQJzoaJFkMtICv9KVKOUIDyGpKupLM9kt3c/Form%20Responses%201";
 
   function fitLinear(points, inputKey, outputKey) {
