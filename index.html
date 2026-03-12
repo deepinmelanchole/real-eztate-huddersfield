@@ -503,16 +503,18 @@ dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
           dot.dataset.description = description;
           dot.dataset.image = image;
 
-          dot.addEventListener("mouseenter", () => {
-            propertyCardImage.src = dot.dataset.image;
-            propertyCardPrice.textContent = dot.dataset.price;
-            propertyCardTitle.textContent = dot.dataset.title;
-            propertyCardDescription.textContent = dot.dataset.description;
+         dot.addEventListener("mouseenter", () => {
+  console.log("hover working");
 
-            propertyCard.style.left = `${position.left}%`;
-            propertyCard.style.top = `${position.top}%`;
-            propertyCard.classList.add("visible");
-          });
+  propertyCardImage.src = dot.dataset.image;
+  propertyCardPrice.textContent = dot.dataset.price;
+  propertyCardTitle.textContent = dot.dataset.title;
+  propertyCardDescription.textContent = dot.dataset.description;
+
+  propertyCard.style.left = "50%";
+  propertyCard.style.top = "50%";
+  propertyCard.classList.add("visible");
+});
 
           dot.addEventListener("mouseleave", () => {
             propertyCard.classList.remove("visible");
