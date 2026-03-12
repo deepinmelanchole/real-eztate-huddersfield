@@ -503,16 +503,22 @@ dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
           dot.dataset.description = description;
           dot.dataset.image = image;
 
-         dot.addEventListener("mouseenter", () => {
-  console.log("hover working");
+        dot.addEventListener("mouseenter", () => {
 
   propertyCardImage.src = dot.dataset.image;
   propertyCardPrice.textContent = dot.dataset.price;
   propertyCardTitle.textContent = dot.dataset.title;
   propertyCardDescription.textContent = dot.dataset.description;
 
-  propertyCard.style.left = "50%";
-  propertyCard.style.top = "50%";
+  const markerRect = dot.getBoundingClientRect();
+  const mapRect = map.getContainer().getBoundingClientRect();
+
+  const x = markerRect.left - mapRect.left;
+  const y = markerRect.top - mapRect.top;
+
+  propertyCard.style.left = `${x}px`;
+  propertyCard.style.top = `${y - 20}px`;
+
   propertyCard.classList.add("visible");
 });
 
