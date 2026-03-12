@@ -153,6 +153,13 @@
     transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 0 4px rgba(158, 117, 255, 0.4);
   }
+  .maplibregl-marker {
+  z-index: 25;
+}
+
+.pulse-dot {
+  cursor: pointer;
+}
 }
 
 
@@ -391,7 +398,8 @@ const map = new maplibregl.Map({
     layers: []
   },
   center: [-1.782, 53.645],
-  zoom: 12.4
+  zoom: 12.4,
+  interactive: false
 });
   const sheetURL = "https://opensheet.elk.sh/1YL1LzLi1lQJzoaJFkMtICv9KVKOUIDyGpKupLM9kt3c/Form%20Responses%201";
 
