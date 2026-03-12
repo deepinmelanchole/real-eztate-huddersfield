@@ -483,14 +483,9 @@ if (image.includes("drive.google.com/open?id=")) {
         .then((result) => {
           console.log("Sheet listing geocode:", address, result);
           
-          const position = latLngToPercent(result.lat, result.lng);
-
           const dot = document.createElement("div");
-          dot.className = "pulse-dot";
-
-          dot.style.left = `${position.left}%`;
-          dot.style.top = `${position.top}%`;
-          dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
+dot.className = "pulse-dot";
+dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
 
           dot.dataset.price = `£${price} pcm`;
           dot.dataset.title = title;
