@@ -111,9 +111,11 @@
 /* Pulsing activity dot */
 /* Pulsing activity dot with separate tooltip */
 .pulse-dot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 5;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  z-index: 25;
+  cursor: pointer;
 }
 
 /* The actual glowing dot */
@@ -131,6 +133,7 @@
   animation: dotPulse 2.8s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: none;
 }
 /* Enlarge only the dot on hover */
 .pulse-dot:hover::before {
