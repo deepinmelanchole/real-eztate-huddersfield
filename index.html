@@ -385,7 +385,11 @@
   ];
 const map = new maplibregl.Map({
   container: "map",
-  style: "https://demotiles.maplibre.org/style.json",
+  style: {
+    version: 8,
+    sources: {},
+    layers: []
+  },
   center: [-1.782, 53.645],
   zoom: 12.4
 });
