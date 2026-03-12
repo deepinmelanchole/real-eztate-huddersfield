@@ -507,7 +507,9 @@ dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
             propertyCard.classList.remove("visible");
           });
 
-          mapWrapper.appendChild(dot);
+          new maplibregl.Marker({ element: dot, anchor: "center" })
+  .setLngLat([result.lng, result.lat])
+  .addTo(map);
         })
         .catch((error) => {
           console.error(`Geocode error for ${address}:`, error);
