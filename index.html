@@ -155,13 +155,14 @@
     transform: translate(-50%, -50%) scale(0.9);
     box-shadow: 0 0 4px rgba(158, 117, 255, 0.4);
   }
-  .maplibregl-marker {
+}
+
+.maplibregl-marker {
   z-index: 25;
 }
 
 .pulse-dot {
   cursor: pointer;
-}
 }
 
 
@@ -396,7 +397,7 @@
 const map = new maplibregl.Map({
   container: "map",
   style: "https://tiles.openfreemap.org/styles/liberty",
- center: [-1.7840, 53.6457]
+ center: [-1.7840, 53.6457],
   zoom: 11.5,
   interactive: false
 });
@@ -461,7 +462,7 @@ const map = new maplibregl.Map({
     };
   }
 
-  const mapWrapper = document.getElementById("mapWrapper");
+  
   const propertyCard = document.getElementById("propertyCard");
   const propertyCardImage = document.getElementById("propertyCardImage");
   const propertyCardPrice = document.getElementById("propertyCardPrice");
