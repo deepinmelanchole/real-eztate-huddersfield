@@ -101,14 +101,12 @@
 }
 
 .map-overlay-reference {
-  z-index: 10;
-  opacity: 0.25;
-  transform: none;
+  display: none;
 }
 
 .map-overlay-svg {
   z-index: 11;
-  opacity: 0.55;
+  opacity: 0.9;
   transform: translateX(7.5px);
   transform-origin: center center;
 }
@@ -307,12 +305,6 @@
 <main>
 <div class="map-wrapper">
   <div id="map"></div>
-
-  <img
-    src="huddersfield-googlemaps-screenshot.png"
-    class="map-overlay map-overlay-reference"
-    alt="Huddersfield screenshot reference"
-  />
 
   <img
     src="huddersfield-map-transparent.svg"
