@@ -98,8 +98,17 @@
   height: 100%;
   object-fit: contain;
   pointer-events: none;
+}
+
+.map-overlay-reference {
   z-index: 10;
   opacity: 0.25;
+  transform: none;
+}
+
+.map-overlay-svg {
+  z-index: 11;
+  opacity: 0.55;
   transform: none;
 }
 
@@ -295,13 +304,19 @@
 
     <!-- MAP -->
 <main>
- <div class="map-wrapper">
-
+<div class="map-wrapper">
   <div id="map"></div>
-    <img
-    src="huddersfield-googlemaps-screenshot.png"
-    class="map-overlay"
-    alt="Huddersfield rental map overlay"
+
+  <img
+    src="huddersfield-trace-reference.png"
+    class="map-overlay map-overlay-reference"
+    alt="Huddersfield screenshot reference"
+  />
+
+  <img
+    src="huddersfield-map-transparent.svg"
+    class="map-overlay map-overlay-svg"
+    alt="Huddersfield SVG overlay"
   />
 
     <div class="property-card" id="propertyCard">
