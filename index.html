@@ -438,6 +438,50 @@ const map = new maplibregl.Map({
   zoom: 11.8,
   interactive: false
 });
+  map.on("load", () => {
+  map.addSource("huddersfield-test-polygon", {
+    type: "geojson",
+    data: {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [[
+          [-1.86, 53.66],
+          [-1.82, 53.68],
+          [-1.75, 53.68],
+          [-1.70, 53.65],
+          [-1.71, 53.61],
+          [-1.75, 53.59],
+          [-1.82, 53.60],
+          [-1.86, 53.63],
+          [-1.86, 53.66]
+        ]]
+      },
+      properties: {}
+    }
+  });
+
+  map.addLayer({
+    id: "huddersfield-test-fill",
+    type: "fill",
+    source: "huddersfield-test-polygon",
+    paint: {
+      "fill-color": "#a855f7",
+      "fill-opacity": 0.10
+    }
+  });
+
+  map.addLayer({
+    id: "huddersfield-test-line",
+    type: "line",
+    source: "huddersfield-test-polygon",
+    paint: {
+      "line-color": "#a855f7",
+      "line-width": 2,
+      "line-opacity": 0.9
+    }
+  });
+});
  
   const sheetURL = "https://opensheet.elk.sh/1YL1LzLi1lQJzoaJFkMtICv9KVKOUIDyGpKupLM9kt3c/Form%20Responses%201";
 
