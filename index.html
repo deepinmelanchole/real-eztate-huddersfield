@@ -112,6 +112,14 @@
 }
 
 .map-overlay-svg {
+  animation: glowPulse 6s ease-in-out infinite;
+
+
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 6px #a855f7); }
+  50% { filter: drop-shadow(0 0 16px #a855f7); }
+  100% { filter: drop-shadow(0 0 6px #a855f7); }
+
   z-index: 11;
   opacity: 0.9;
   transform: translateX(7.5px);
