@@ -439,28 +439,25 @@ const map = new maplibregl.Map({
   interactive: false
 });
   map.on("load", () => {
- map.addSource("huddersfield-test-polygon", {
-  type: "geojson",
-  data: {
-    type: "Feature",
-    properties: {
-      name: "Lindley"
-    },
-    geometry: {
-      type: "Polygon",
-      coordinates: [[
-        [-1.834, 53.662],
-        [-1.821, 53.665],
-        [-1.805, 53.660],
-        [-1.808, 53.651],
-        [-1.824, 53.649],
-        [-1.836, 53.654],
-        [-1.834, 53.662]
-      ]]
-    }
-  }
-});
-      properties: {}
+  map.addSource("huddersfield-test-polygon", {
+    type: "geojson",
+    data: {
+      type: "Feature",
+      properties: {
+        name: "Lindley"
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [[
+          [-1.834, 53.662],
+          [-1.821, 53.665],
+          [-1.805, 53.660],
+          [-1.808, 53.651],
+          [-1.824, 53.649],
+          [-1.836, 53.654],
+          [-1.834, 53.662]
+        ]]
+      }
     }
   });
 
