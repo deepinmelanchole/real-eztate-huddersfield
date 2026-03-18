@@ -41,7 +41,7 @@
       .hero-subtitle {
         font-size: 0.85rem;
         opacity: 0.75;
-        margin-bottom: 16px;
+        margin-bottom: 4px;
       }
 
       .hero-search-wrapper {
@@ -339,6 +339,107 @@
   flex: 1;
   min-height: 320px;
 }
+      .panel-search {
+  border-radius: 18px;
+}
+
+.panel-search-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.panel-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.panel-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.listing-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.listing-image {
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.listing-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.listing-meta-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.listing-icon {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.listing-details {
+  padding: 18px 16px 20px;
+}
+
+.listing-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.listing-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.listing-description {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
+}
       @media (max-width: 600px) {
         main {
           padding-bottom: 80px;
@@ -372,12 +473,7 @@
         <div class="hero-subtitle">
           Map-first rentals around Huddersfield — prototype view.
         </div>
-        <div class="hero-search-wrapper">
-          <input
-            class="hero-search"
-            type="text"
-            placeholder="Search by area, road or property… (demo only)"
-          />
+       
         </div>
       </section>
 
@@ -406,11 +502,42 @@
     </div>
   </section>
 
-  <aside class="side-panel">
-    <div class="panel-block">Search</div>
-    <div class="panel-block">Filters</div>
-    <div class="panel-block panel-card">Property card</div>
-  </aside>
+ <aside class="side-panel">
+  <div class="panel-search">
+    <input
+      class="panel-search-input"
+      type="text"
+      placeholder="Search by area, road or property..."
+    />
+  </div>
+
+  <div class="panel-filters">
+    <button class="filter-chip">Rent</button>
+    <button class="filter-chip">Beds</button>
+    <button class="filter-chip">Area</button>
+    <button class="filter-chip">3D Tour</button>
+  </div>
+
+  <div class="listing-panel">
+    <div class="listing-image">Property Image</div>
+
+    <div class="listing-meta-row">
+      <button class="listing-icon">♡</button>
+      <div class="listing-meta-actions">
+        <button class="listing-icon">3D</button>
+        <button class="listing-icon">↗</button>
+      </div>
+    </div>
+
+    <div class="listing-details">
+      <div class="listing-price">£950 pcm</div>
+      <div class="listing-title">Modern Studio near Uni</div>
+      <div class="listing-description">
+        Compact modern studio near the university and town centre, with strong transport access and a clean modern finish.
+      </div>
+    </div>
+  </div>
+</aside>
 </main>
           <!-- Example marker: adjust left/top % until it sits on the right spot -->
          
