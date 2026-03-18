@@ -76,12 +76,12 @@
         padding: 8px 0 60px;
       }
 
-     .map-wrapper {
+    .map-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 100%;
   height: 700px;
-  padding: 0 16px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -300,11 +300,62 @@
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.78);
 }
+      .app-layout {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.7fr 0.95fr;
+  gap: 24px;
+  align-items: stretch;
+  padding: 16px 24px 60px;
+}
+
+.map-section {
+  min-width: 0;
+}
+
+.side-panel {
+  min-width: 0;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-block {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.panel-card {
+  flex: 1;
+  min-height: 320px;
+}
       @media (max-width: 600px) {
         main {
           padding-bottom: 80px;
         }
+@media (max-width: 900px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
 
+  .side-panel {
+    min-height: auto;
+  }
+
+  .map-wrapper {
+    height: 560px;
+  }
+}
         .cta-panel {
           max-width: 220px;
         }
@@ -331,27 +382,35 @@
       </section>
 
     <!-- MAP -->
-<main>
-<div class="map-wrapper">
-  <div id="map"></div>
+<main class="app-layout">
+  <section class="map-section">
+    <div class="map-wrapper">
+      <div id="map"></div>
 
-  <img
-    src="huddersfield-map-transparent.svg"
-    class="map-overlay map-overlay-svg"
-    alt="Huddersfield SVG overlay"
-  />
+      <img
+        src="huddersfield-map-transparent.svg"
+        class="map-overlay map-overlay-svg"
+        alt="Huddersfield SVG overlay"
+      />
 
-    <div class="property-card" id="propertyCard">
-  <img id="propertyCardImage" src="" alt="Property preview" />
-  <div class="property-card-body">
-    <div class="property-card-price" id="propertyCardPrice">£950 pcm</div>
-    <div class="property-card-title" id="propertyCardTitle">Modern Studio</div>
-    <div class="property-card-description" id="propertyCardDescription">
-      Compact modern studio near the university and town centre.
+      <div class="property-card" id="propertyCard">
+        <img id="propertyCardImage" src="" alt="Property preview" />
+        <div class="property-card-body">
+          <div class="property-card-price" id="propertyCardPrice">£950 pcm</div>
+          <div class="property-card-title" id="propertyCardTitle">Modern Studio</div>
+          <div class="property-card-description" id="propertyCardDescription">
+            Compact modern studio near the university and town centre.
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  </div>
+  </section>
+
+  <aside class="side-panel">
+    <div class="panel-block">Search</div>
+    <div class="panel-block">Filters</div>
+    <div class="panel-block panel-card">Property card</div>
+  </aside>
 </main>
           <!-- Example marker: adjust left/top % until it sits on the right spot -->
          
