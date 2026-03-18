@@ -616,6 +616,30 @@ dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
   }
 
   loadListingsFromSheet();
+  function getUserLocation() {
+  if (!navigator.geolocation) {
+    console.error("Geolocation is not supported by this browser.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const userLat = position.coords.latitude;
+      const userLng = position.coords.longitude;
+
+      console.log("User location:", { lat: userLat, lng: userLng });
+    },
+    (error) => {
+      console.error("Geolocation error:", error);
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+}
+  getUserLocation();
 </script>
   </body>
 </html>
