@@ -175,7 +175,26 @@
   transform: translate(-50%, -50%) scale(2.3);
   box-shadow: 0 0 18px rgba(158, 117, 255, 1);
 }
+dot.addEventListener("click", () => {
+  const cardId = dot.dataset.cardId;
+  const card = document.getElementById(cardId);
 
+  if (card) {
+    // remove previous highlights
+    document.querySelectorAll(".listing-card").forEach((el) => {
+      el.classList.remove("active");
+    });
+
+    // highlight current
+    card.classList.add("active");
+
+    // scroll into view
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+});
 
 
 @keyframes dotPulse {
@@ -304,7 +323,7 @@
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.7fr 0.95fr;
+  grid-template-columns: 1.35fr 1.05fr;
   gap: 24px;
   align-items: start;
   padding: 24px 24px 60px;
@@ -315,8 +334,8 @@
 }
 
 .side-panel {
-  min-width: 0;
-  min-height: 700px;
+ min-width: 0;
+  height: 78vh;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -462,6 +481,66 @@
     max-width: 220px;
   }
 }
+      .listings-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.listing-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.listing-card.active {
+  border-color: rgba(168, 85, 247, 0.9);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.2);
+  transform: translateY(-2px);
+}
+
+.listing-card-image {
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.listing-card-body {
+  padding: 14px 14px 16px;
+}
+
+.listing-card-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.listing-card-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.listing-card-meta {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 10px;
+}
+
+.listing-card-description {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
     </style>
     <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
@@ -501,7 +580,7 @@
     </div>
   </section>
 
- <aside class="side-panel">
+<aside class="side-panel">
   <div class="panel-search">
     <input
       class="panel-search-input"
@@ -517,27 +596,47 @@
     <button class="filter-chip">3D Tour</button>
   </div>
 
-  <div class="listing-panel">
-    <div class="listing-image">Property Image</div>
-
-    <div class="listing-meta-row">
-      <button class="listing-icon">♡</button>
-      <div class="listing-meta-actions">
-        <button class="listing-icon">3D</button>
-        <button class="listing-icon">↗</button>
+  <div class="listings-scroll" id="listingsScroll">
+    <div class="listing-card" id="listing-modern-studio">
+      <div class="listing-card-image">Property Image</div>
+      <div class="listing-card-body">
+        <div class="listing-card-price">£950 pcm</div>
+        <div class="listing-card-title">Modern Studio near Uni</div>
+        <div class="listing-card-meta">1 bed · HD1 · 3D Tour</div>
+        <div class="listing-card-description">
+          Compact modern studio near the university and town centre.
+        </div>
       </div>
     </div>
 
-    <div class="listing-details">
-      <div class="listing-price">£950 pcm</div>
-      <div class="listing-title">Modern Studio near Uni</div>
-      <div class="listing-description">
-        Compact modern studio near the university and town centre, with strong transport access and a clean modern finish.
+    <div class="listing-card" id="listing-lindley-apartment">
+      <div class="listing-card-image">Property Image</div>
+      <div class="listing-card-body">
+        <div class="listing-card-price">£1200 pcm</div>
+        <div class="listing-card-title">Lindley Apartment</div>
+        <div class="listing-card-meta">2 beds · Lindley</div>
+        <div class="listing-card-description">
+          Spacious apartment in a quieter area with a premium feel.
+        </div>
+      </div>
+    </div>
+
+    <div class="listing-card" id="listing-parkside-flat">
+      <div class="listing-card-image">Property Image</div>
+      <div class="listing-card-body">
+        <div class="listing-card-price">£875 pcm</div>
+        <div class="listing-card-title">Parkside Flat</div>
+        <div class="listing-card-meta">1 bed · HD1</div>
+        <div class="listing-card-description">
+          Affordable flat with quick access to central Huddersfield.
+        </div>
       </div>
     </div>
   </div>
 </aside>
+  
 </main>
+      
           <!-- Example marker: adjust left/top % until it sits on the right spot -->
          
 
@@ -760,6 +859,8 @@ if (image.includes("drive.google.com/open?id=")) {
           
           const dot = document.createElement("div");
 dot.className = "pulse-dot";
+          const safeId = title.toLowerCase().replace(/\s+/g, "-");
+dot.dataset.cardId = "listing-" + safeId;
 dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
 
           dot.dataset.price = `£${price} pcm`;
