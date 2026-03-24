@@ -175,16 +175,6 @@
   transform: translate(-50%, -50%) scale(2.3);
   box-shadow: 0 0 18px rgba(158, 117, 255, 1);
 }
-dot.addEventListener("click", () => {
-  const cardId = dot.dataset.cardId;
-  const card = document.getElementById(cardId);
-
-  if (card) {
-    // remove previous highlights
-    document.querySelectorAll(".listing-card").forEach((el) => {
-      el.classList.remove("active");
-    });
-
     // highlight current
     card.classList.add("active");
 
@@ -346,7 +336,6 @@ dot.addEventListener("click", () => {
   overflow-y: auto;
   max-height: 700px;
   padding-right: 6px;
-}
 }
 
 .panel-block {
@@ -584,18 +573,6 @@ dot.addEventListener("click", () => {
         class="map-overlay map-overlay-svg"
         alt="Huddersfield SVG overlay"
       />
-
-      <div class="listing-card" id="listing-modern-studio-near-uni">
-  <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" />
-
-  <div class="listing-info">
-    <div class="listing-price">£950 pcm</div>
-    <div class="listing-title">Modern Studio near Uni</div>
-    <div class="listing-description">
-      Compact modern studio near the university and town centre.
-    </div>
-  </div>
-</div>
     </div>
   </section>
 
@@ -616,7 +593,7 @@ dot.addEventListener("click", () => {
   </div>
 
   <div class="listings-scroll" id="listingsScroll">
-    <div class="listing-card" id="listing-modern-studio">
+    <div class="listing-card" id="listing-modern-studio-near-uni">
       <div class="listing-card-image">Property Image</div>
       <div class="listing-card-body">
         <div class="listing-card-price">£950 pcm</div>
@@ -847,11 +824,6 @@ const map = new maplibregl.Map({
   }
 
   
-  const propertyCard = document.getElementById("propertyCard");
-  const propertyCardImage = document.getElementById("propertyCardImage");
-  const propertyCardPrice = document.getElementById("propertyCardPrice");
-  const propertyCardTitle = document.getElementById("propertyCardTitle");
-  const propertyCardDescription = document.getElementById("propertyCardDescription");
 
   async function loadListingsFromSheet() {
     const response = await fetch(sheetURL);
@@ -886,25 +858,23 @@ dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
           dot.dataset.title = title;
           dot.dataset.description = description;
           dot.dataset.image = image;
+dot.addEventListener("click", () => {
+  const cardId = dot.dataset.cardId;
+  const card = document.getElementById(cardId);
 
-        dot.addEventListener("mouseenter", () => {
+  if (card) {
+    document.querySelectorAll(".listing-card").forEach((el) => {
+      el.classList.remove("active");
+    });
 
-  propertyCardImage.src = dot.dataset.image;
-  propertyCardPrice.textContent = dot.dataset.price;
-  propertyCardTitle.textContent = dot.dataset.title;
-  propertyCardDescription.textContent = dot.dataset.description;
-
-  const markerRect = dot.getBoundingClientRect();
-  const mapRect = map.getContainer().getBoundingClientRect();
-
-  const x = markerRect.left - mapRect.left;
-  const y = markerRect.top - mapRect.top;
-
-  propertyCard.style.left = `${x}px`;
-  propertyCard.style.top = `${y - 20}px`;
-
-  propertyCard.classList.add("visible");
+    card.classList.add("active");
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
 });
+        
 
           dot.addEventListener("mouseleave", () => {
             propertyCard.classList.remove("visible");
