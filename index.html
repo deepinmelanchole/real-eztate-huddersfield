@@ -482,14 +482,13 @@
   gap: 14px;
 }
 
-.listing-card {
-  border-radius: 18px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  cursor: pointer;
-  transition: 0.2s ease;
+.listings-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .listing-card:hover {
   transform: translateY(-3px);
@@ -605,29 +604,39 @@
 </div>
       
 
-    <div class="listing-card" id="listing-lindley-apartment">
-      <div class="listing-card-image">Property Image</div>
-      <div class="listing-card-body">
-        <div class="listing-card-price">£1200 pcm</div>
-        <div class="listing-card-title">Lindley Apartment</div>
-        <div class="listing-card-meta">2 beds · Lindley</div>
-        <div class="listing-card-description">
-          Spacious apartment in a quieter area with a premium feel.
-        </div>
-      </div>
-    </div>
+   <div class="listing-card" id="listing-lindley-apartment">
+  <img
+    class="listing-card-image"
+    src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80"
+    alt="Lindley Apartment"
+  />
 
-    <div class="listing-card" id="listing-parkside-flat">
-      <div class="listing-card-image">Property Image</div>
-      <div class="listing-card-body">
-        <div class="listing-card-price">£875 pcm</div>
-        <div class="listing-card-title">Parkside Flat</div>
-        <div class="listing-card-meta">1 bed · HD1</div>
-        <div class="listing-card-description">
-          Affordable flat with quick access to central Huddersfield.
-        </div>
-      </div>
+  <div class="listing-card-body">
+    <div class="listing-card-price">£1200 pcm</div>
+    <div class="listing-card-title">Lindley Apartment</div>
+    <div class="listing-card-meta">2 beds · Lindley</div>
+    <div class="listing-card-description">
+      Spacious apartment in a quieter area with a premium feel and modern interior.
     </div>
+  </div>
+</div>
+
+   <div class="listing-card" id="listing-parkside-flat">
+  <img
+    class="listing-card-image"
+    src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80"
+    alt="Parkside Flat"
+  />
+
+  <div class="listing-card-body">
+    <div class="listing-card-price">£875 pcm</div>
+    <div class="listing-card-title">Parkside Flat</div>
+    <div class="listing-card-meta">1 bed · HD1</div>
+    <div class="listing-card-description">
+      Affordable flat with quick access to central Huddersfield and nearby parks.
+    </div>
+  </div>
+</div>
   </div>
 </aside>
   
