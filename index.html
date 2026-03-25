@@ -851,8 +851,15 @@ if (image.includes("drive.google.com/open?id=")) {
           
           const dot = document.createElement("div");
 dot.className = "pulse-dot";
-          const safeId = title.toLowerCase().replace(/\s+/g, "-");
-dot.dataset.cardId = "listing-modern-studio-near-uni";
+         const safeId = title
+  .toLowerCase()
+  .trim()
+  .replace(/[^a-z0-9\s-]/g, "")
+  .replace(/\s+/g, "-");
+
+dot.dataset.cardId = "listing-" + safeId;
+
+console.log("Dot title:", title, "=>", dot.dataset.cardId);
 dot.style.setProperty("--delay", `${(index * 0.15).toFixed(2)}s`);
 
           dot.dataset.price = `£${price} pcm`;
