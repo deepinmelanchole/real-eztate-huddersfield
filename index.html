@@ -175,16 +175,7 @@
   transform: translate(-50%, -50%) scale(2.3);
   box-shadow: 0 0 18px rgba(158, 117, 255, 1);
 }
-    // highlight current
-    card.classList.add("active");
-
-    // scroll into view
-    card.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
-});
+    
 
 
 @keyframes dotPulse {
@@ -886,9 +877,7 @@ dot.addEventListener("click", () => {
 });
         
 
-          dot.addEventListener("mouseleave", () => {
-            propertyCard.classList.remove("visible");
-          });
+         
 
           new maplibregl.Marker({ element: dot, anchor: "center" })
   .setLngLat([result.lng, result.lat])
